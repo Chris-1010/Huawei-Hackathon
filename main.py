@@ -36,7 +36,7 @@ class DatabaseAI(object):
 
         #Tokenize the question - in order for it to be read by the ai
         tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")  #create the tokenizer
-        stop_words = set(stopwords.words("english"))         #set of english stop words like commas, full stops and question marks
+        stop_words = set(stopwords.words("english"))         #words like and, so, then - useless filler words
         tokens = tokenizer.tokenize(question)
         for token in tokens:
             if token in stop_words:
