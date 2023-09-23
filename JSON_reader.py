@@ -6,8 +6,8 @@ class DataJS:
     def __init__(self,file_name):
         self.file_name = file_name
         self.data = []                                      #Stores data of individual files 
-        #self.get_data()
-        
+        self.questions = []
+        self.sql = []
     def get_data(self):
         self.file_name = os.path.join("example-data/",self.file_name)                                     #Places content into data
         if path.isfile(self.file_name) is False:
@@ -16,7 +16,17 @@ class DataJS:
         der = json.load(f)                                  # places contents of the file in der 
         self.data = der                                     #places content into instance var 
         f.close()
+        self.sort_data()
         return self.data
+    def sort_data(self):
+        for i in range(len(self.data)):
+            for key in self.data[i].keys():                 #Goes through array of keys 
+                if key == "question":
+                    self.questions.append(self.data[i][key])
+                elif key == "sql":
+                    self.sql.append(self.data[i][key])
+        return self.questions,self.sql
+
 class Files:
     def __init__(self):
         self.files = []                                     #Stores all the instances of DataJS
@@ -29,7 +39,11 @@ class Files:
 if __name__ == "__main__":
     f = Files()
     f.add_to_list()
-    print(f.files[0].get_data())
+    hi = f.files[0]
+    hi.get_data()
+    #print(hi.questions)
+    print(hi.sql)
+
 
 
 
