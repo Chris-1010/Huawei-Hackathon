@@ -1,1 +1,0 @@
-// The database from https://mystery.knightlab.com/
