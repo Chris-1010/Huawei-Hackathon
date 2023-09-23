@@ -7,6 +7,7 @@ import sqlite3
 from transformers import BertTokenizer
 import nltk
 from nltk.corpus import stopwords
+from intent import IntentRecognition
 
 # nltk.download("stopwords")
 
