@@ -6,19 +6,20 @@ class DataJS:
     def __init__(self,file_name):
         self.file_name = file_name
         self.data = []                                      #Stores data of individual files 
-        self.questions = []
-        self.sql = []
+        self.questions = []                                 #Stores example questions 
+        self.sql = []                                       #Store example query 
     def get_data(self):
         self.file_name = os.path.join("example-data/",self.file_name)                                     #Places content into data
         if path.isfile(self.file_name) is False:
             raise Exception("File not found")
         f = open(self.file_name,"r")                        #opens file 
-        der = json.load(f)                                  # places contents of the file in der 
+        der = json.load(f)                                  #places contents of the file in der 
         self.data = der                                     #places content into instance var 
         f.close()
         self.sort_data()
         return self.data
-    def sort_data(self):
+    
+    def sort_data(self):                                    #Method goes through data set of instance and catorgrizes data (Qs & SQL)
         for i in range(len(self.data)):
             for key in self.data[i].keys():                 #Goes through array of keys 
                 if key == "question":
@@ -37,10 +38,10 @@ class Files:
                     self.files.append(der)
         
 if __name__ == "__main__":
-    f = Files()
-    f.add_to_list()
-    hi = f.files[0]
-    hi.get_data()
+    f = Files()                                             #Initializes Files
+    f.add_to_list()                                         #Places JSON files in file set 
+    hi = f.files[0]                         
+    hi.get_data()                                           #Loads the JSON file content into the instance 
     #print(hi.questions)
     print(hi.sql)
 
