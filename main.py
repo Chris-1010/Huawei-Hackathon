@@ -2,10 +2,8 @@
 To recap, you are here to build an AI Data Assistant. Your co-pilot for the semi-structured data that many companies has.
  The copilot should make life of Human Data Assistant easier by getting insights from the data it has access to.
 """
-import sqlite3
-from transformers import BertTokenizer
-from nltk.corpus import stopwords
 
+import sqlite3
 class DatabaseAI(object):
     def __init__(self, database_name:str):
         self._database_name = database_name
@@ -18,8 +16,8 @@ class DatabaseAI(object):
         cursor = conn.cursor()
 
         #Execute a query
-        cursor.execute("""SELECT * FROM covid_vaccinations""")
-        rows = cursor.fetchall()
+        rows = cursor.execute("""SELECT * FROM covid_vaccinations LIMIT 1;""").fetchall()
+
 
         #Close connection
         cursor.close()
@@ -27,22 +25,15 @@ class DatabaseAI(object):
 
         return rows
 
-    def query_fun(self, question:str, tables:list[str]):
+    def query_fun(question:str, tables:list[str], database_connection: object):
         """This function will be run once for each question related to the given database."""
-        #Tokenize the question - in order for it to be read by the ai
-        tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")  #create the tokenizer
-        stop_words = set(stopwords.words("english"))         #set of english stop words like commas, full stops and question marks
-        tokens = tokenizer.tokenize(question)
-        for token in tokens:
-            if token in stopwords:
-                tokens.remove(token)            #removing any stop words so that ai doesn't need to process them and can read more efficiently  
-
-    
-        
+        return
 
 
-user = DatabaseAI("app.db")
-rows = user.connect_fun()
+databases = {"covid_vaccinations": "example-data/example-covid-vaccinations.sqlite3", "simple_users": "example-data/example-simple.sqlite3", "murder_mystery": "example-data/sql-murder-mystery.sqlite3"}
+database = databases[input("Would you like to use the database of:\n'covid_vaccinations',\t'',\t'simple_users'")] # sub in whatever database you'd like instead of "simple_users"
+the_ai = DatabaseAI(database)
+print(the_ai.connect_fun())
 
-question = input("Enter your question: ")
-user.query_fun(question, rows)
+# from datasets import load_dataset
+# dataset = load_dataset("fka/awesome-chatgpt-prompts")
