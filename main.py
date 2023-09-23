@@ -1,7 +1,15 @@
 #region Imports and Setup
 
-
 import argparse
+from JSON_reader import DataJS, Files
+import os
+import sqlite3
+from transformers import BertTokenizer
+import nltk
+from nltk.corpus import stopwords
+from intent import IntentRecognition
+import pke.unsupervised
+import spacy
 # Create a parsing task.
 parser = argparse.ArgumentParser(description="train mnist",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -12,22 +20,12 @@ parser.add_argument('--data_url', type=str, help='the training data')
 # Parse the parameters.
 args, unkown = parser.parse_known_args()
 
-import os
+# Installing extra libraries
 os.system('pip install transformers')
 os.system('pip install nltk')
 os.system('pip install tensorflow')
 
-import sqlite3
-from transformers import BertTokenizer
-import nltk
-from nltk.corpus import stopwords
-from intent import IntentRecognition
-import pke.unsupervised
-import spacy
-
 # nltk.download("stopwords")
-
-#endregion
 
 class DatabaseAI(object):
     def __init__(self, database_name:str):
