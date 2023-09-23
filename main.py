@@ -44,7 +44,10 @@ class DatabaseAI(object):
 
 
 databases = {"covid_vaccinations": "example-data/example-covid-vaccinations.sqlite3", "orders": "example-data/example-simple.sqlite3", "murder_mystery": "example-data/sql-murder-mystery.sqlite3"}
-preferred_database = input("Would you like to use the database of:\n'covid_vaccinations',\t'orders', or\t'murder_mystery'\n\n")
+preferred_database = input("Would you like to use the database of:\n'covid_vaccinations',\t'orders'")
+while preferred_database not in databases:
+        print("Not a valid Database")
+        preferred_database = input("Would you like to use the database of:\n'covid_vaccinations',\t'orders', or\t'murder_mystery'\n\n")
 db_path = databases[preferred_database]
 the_ai = DatabaseAI(db_path)
 rows = the_ai.connect_fun(preferred_database)
