@@ -1,10 +1,3 @@
 Welcome to our Github collaberative readme.txt file.
 
-John david was here!
-
-I miss my wife.
-
-Dublin Zoo: Student (with valid ID)	€17.50	€16.65	€14.50
-
-Jordan was here ^(-O-)^
-
+In this project, we worked together to attempt to build an AI assistant, training it on data.
